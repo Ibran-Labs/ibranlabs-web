@@ -1,0 +1,72 @@
+import "./theme.css";
+import '@coinbase/onchainkit/styles.css';
+import type { Metadata, Viewport } from "next";
+import "./globals.css";
+import { Providers } from "./providers";
+import GlowingGridBackground from "@/components/glowing-grid-background";
+import { Toaster } from "sonner";
+import MobileNavbarTelegram from "@/components/navbar";
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+};
+
+export async function generateMetadata(): Promise<Metadata> {
+  const URL = process.env.NEXT_PUBLIC_URL;
+  return {
+    title: process.env.NEXT_PUBLIC_ONCHAINKIT_PROJECT_NAME,
+    description:
+      "Crosschain Lending Protocol",
+    other: {
+      "fc:frame": JSON.stringify({
+        version: "next",
+        imageUrl: process.env.NEXT_PUBLIC_APP_HERO_IMAGE,
+        button: {
+          title: `Launch ${process.env.NEXT_PUBLIC_ONCHAINKIT_PROJECT_NAME}`,
+          action: {
+            type: "launch_frame",
+            name: process.env.NEXT_PUBLIC_ONCHAINKIT_PROJECT_NAME,
+            url: URL,
+            splashImageUrl: process.env.NEXT_PUBLIC_SPLASH_IMAGE,
+            splashBackgroundColor:
+              process.env.NEXT_PUBLIC_SPLASH_BACKGROUND_COLOR,
+          },
+        },
+      }),
+    },
+  };
+}
+
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
+  return (
+    <html lang="en" suppressHydrationWarning>
+      <body className="bg-background" suppressHydrationWarning>
+        <Providers>
+          <GlowingGridBackground />
+          <Toaster 
+            position="top-right"
+            expand={false}
+            richColors
+            closeButton
+            duration={2000}
+            style={{
+              top: '5%',
+              transform: 'translateY(0%)',
+            }}
+          />
+          <div className="mx-2">
+            <div className="relative flex flex-col h-screen">
+              <main className="mx-auto w-full max-w-2xl pt-8 flex-grow pb-20">{children}</main>
+            </div>
+            <MobileNavbarTelegram />
+          </div>
+        </Providers>
+      </body>
+    </html>
+  );
+}
