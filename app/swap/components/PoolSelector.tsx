@@ -39,7 +39,7 @@ const PoolSelector: React.FC<PoolSelectorProps> = ({
     <div className="flex flex-col md:flex-row gap-2 mb-5">
       <div className="flex-1 min-w-0">
         <Select onValueChange={(value) => setLpAddressSelected(value)} value={lpAddressSelected}>
-          <SelectTrigger className="truncate w-full bg-slate-800/50 text-blue-300 border border-blue-400/30 hover:border-blue-400/50 focus:ring-2 focus:ring-blue-400/50 px-3 md:px-6 py-2 md:py-4 rounded-lg shadow-sm cursor-pointer text-sm md:text-base min-h-[44px] md:min-h-[56px]">
+          <SelectTrigger className="truncate w-full bg-blue-600 hover:bg-blue-700 text-white border border-blue-500 px-3 md:px-6 py-2 md:py-4 rounded-lg shadow-sm cursor-pointer text-sm md:text-base min-h-[44px] md:min-h-[56px] transition-colors">
             <SelectValue placeholder="Select LP Address">
               {lpAddressSelected && (
                 <div className="flex items-center justify-between w-full">
@@ -61,14 +61,14 @@ const PoolSelector: React.FC<PoolSelectorProps> = ({
                           width={16}
                           height={16}
                         />
-                        <span className="text-xs md:text-sm truncate">
+                        <span className="text-xs md:text-sm truncate text-white">
                           {tokenName(
                             lpAddress.find((lp) => lp.id === lpAddressSelected)?.collateralToken
                           )}
                         </span>
                       </div>
                       <div className="flex items-center justify-center px-2 md:px-4">
-                        <span className="text-gray-400 text-xs flex-shrink-0">→</span>
+                        <span className="text-white text-xs flex-shrink-0">→</span>
                       </div>
                       <div className="flex items-center gap-1 md:gap-2 flex-1 justify-end">
                         <Image
@@ -86,7 +86,7 @@ const PoolSelector: React.FC<PoolSelectorProps> = ({
                           width={16}
                           height={16}
                         />
-                        <span className="text-xs md:text-sm truncate">
+                        <span className="text-xs md:text-sm truncate text-white">
                           {tokenName(
                             lpAddress.find((lp) => lp.id === lpAddressSelected)?.borrowToken
                           )}
@@ -108,7 +108,7 @@ const PoolSelector: React.FC<PoolSelectorProps> = ({
                   <SelectItem
                     key={lp.id}
                     value={lp.id}
-                    className="py-3 px-3 text-sm text-gray-100 hover:bg-slate-700/50 transition-colors"
+                    className="py-3 px-3 text-sm text-gray-100 hover:bg-slate-700/50 hover:text-gray-100 transition-colors"
                   >
                     <div className="flex items-center justify-between w-full">
                       <div className="flex items-center gap-1 md:gap-2 flex-1">

@@ -126,7 +126,7 @@ export default function SwapPanel() {
                     <SelectItem
                       key={lp.id}
                       value={lp.id}
-                      className="py-3 px-3 text-sm text-gray-100 hover:bg-slate-700/50 transition-colors"
+                      className="py-3 px-3 text-sm text-gray-100 hover:bg-slate-700/50 hover:text-gray-100 transition-colors"
                     >
                       <div className="flex items-center justify-between w-full">
                         <div className="flex items-center gap-1 md:gap-2 flex-1">
@@ -252,7 +252,7 @@ export default function SwapPanel() {
                   <SelectItem
                     key={index}
                     value={token.addresses[defaultChain]}
-                    className="text-gray-100 flex flex-row gap-2 items-center cursor-pointer hover:bg-slate-700/50 py-2"
+                    className="text-gray-100 flex flex-row gap-2 items-center cursor-pointer hover:bg-slate-700/50 hover:text-gray-100 py-2"
                   >
                     <Image
                       src={tokenLogo(token.addresses[defaultChain]) ?? ""}
@@ -345,7 +345,7 @@ export default function SwapPanel() {
                   <SelectItem
                     key={index}
                     value={token.addresses[defaultChain]}
-                    className="text-gray-100 flex flex-row gap-2 items-center cursor-pointer hover:bg-slate-700/50 py-2"
+                    className="text-gray-100 flex flex-row gap-2 items-center cursor-pointer hover:bg-slate-700/50 hover:text-gray-100 py-2"
                   >
                     <Image
                       src={tokenLogo(token.addresses[defaultChain]) ?? ""}

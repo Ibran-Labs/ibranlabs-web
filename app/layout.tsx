@@ -60,8 +60,8 @@ export default function RootLayout({
             }}
           />
           <div className="mx-2">
-            <div className="relative flex flex-col h-screen">
-              <main className="mx-auto w-full max-w-2xl pt-8 flex-grow pb-20">{children}</main>
+            <div className="relative flex flex-col min-h-screen">
+              <main className="mx-auto w-full max-w-2xl pt-8 flex-grow pb-24">{children}</main>
             </div>
             <MobileNavbarTelegram />
           </div>

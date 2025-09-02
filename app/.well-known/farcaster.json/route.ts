@@ -21,7 +21,7 @@ export async function GET() {
       signature: "MHg0MjM5MjM1NDdmYzk1MjIyYTM2MTNmZjQ1NjQzNzg3OTQ4YWViOTEzMGMxMjdiMzE3ZTZjYzQxM2NlNGMzMjI1MGM1NTU2YWYxNmRkNDdjOTBlMzQ2ZjI2MmY2OWZkMmQzNzUwZmFhNzc3MmVhMWI3NDcyMGQ5OWFmZDc3ODc1MzFi",
     },
   "frame": {
-    "name": "ibranlabs-mini-apps",
+    "name": "ibran",
     "homeUrl": "https://ibran-finance.vercel.app",
     "iconUrl": "https://ibran-finance.vercel.app/ibran.png",
     "version": "1",

@@ -323,7 +323,7 @@ export const CreatePoolDialog: React.FC<CreatePoolDialogProps> = ({
                         <SelectItem
                           key={token.symbol}
                           value={token.symbol}
-                          className="hover:bg-slate-700/80 focus:bg-slate-500/90 rounded-lg mx-0 my-0.5 transition-colors duration-150"
+                          className="hover:bg-slate-700/80 hover:text-white focus:bg-slate-500/90 focus:text-white rounded-lg mx-0 my-0.5 transition-colors duration-150"
                         >
                           {renderTokenOption(token)}
                         </SelectItem>
@@ -350,7 +350,7 @@ export const CreatePoolDialog: React.FC<CreatePoolDialogProps> = ({
                         <SelectItem
                           key={token.symbol}
                           value={token.symbol}
-                          className="hover:bg-slate-600/90 focus:bg-slate-700/80 rounded-lg mx-1 my-0.5 transition-colors duration-150"
+                          className="hover:bg-slate-600/90 hover:text-white focus:bg-slate-700/80 focus:text-white rounded-lg mx-1 my-0.5 transition-colors duration-150"
                         >
                           {renderTokenOption(token)}
                         </SelectItem>

@@ -41,37 +41,37 @@ const HistoryFilters: React.FC<HistoryFiltersProps> = ({
                   <SelectValue placeholder="Select transaction type" />
                 </SelectTrigger>
                 <SelectContent className="bg-gray-800 text-gray-100 border border-cyan-800 backdrop-blur-sm max-h-60">
-                  <SelectItem value="all" className="hover:bg-gray-700 focus:bg-gray-700">
+                  <SelectItem value="all" className="hover:bg-gray-700 hover:text-gray-100 focus:bg-gray-700 focus:text-gray-100">
                     <div className="flex items-center gap-2">
                       <BarChart3 className="w-4 h-4" />
                       All Types
                     </div>
                   </SelectItem>
-                  <SelectItem value="supply_liquidity" className="hover:bg-gray-700 focus:bg-gray-700">
+                  <SelectItem value="supply_liquidity" className="hover:bg-gray-700 hover:text-gray-100 focus:bg-gray-700 focus:text-gray-100">
                     <div className="flex items-center gap-2">
                       <TrendingUp className="w-4 h-4 text-green-400" />
                       Supply Liquidity
                     </div>
                   </SelectItem>
-                  <SelectItem value="withdraw_liquidity" className="hover:bg-gray-700 focus:bg-gray-700">
+                  <SelectItem value="withdraw_liquidity" className="hover:bg-gray-700 hover:text-gray-100 focus:bg-gray-700 focus:text-gray-100">
                     <div className="flex items-center gap-2">
                       <TrendingUp className="w-4 h-4 text-red-400" />
                       Withdraw Liquidity
                     </div>
                   </SelectItem>
-                  <SelectItem value="borrow_debt" className="hover:bg-gray-700 focus:bg-gray-700">
+                  <SelectItem value="borrow_debt" className="hover:bg-gray-700 hover:text-gray-100 focus:bg-gray-700 focus:text-gray-100">
                     <div className="flex items-center gap-2">
                       <Wallet className="w-4 h-4 text-yellow-400" />
                       Borrow Debt
                     </div>
                   </SelectItem>
-                  <SelectItem value="repay_collateral" className="hover:bg-gray-700 focus:bg-gray-700">
+                  <SelectItem value="repay_collateral" className="hover:bg-gray-700 hover:text-gray-100 focus:bg-gray-700 focus:text-gray-100">
                     <div className="flex items-center gap-2">
                     <BarChart2 className="w-4 h-4 text-purple-400" />
                       Repay Collateral
                     </div>
                   </SelectItem>
-                  <SelectItem value="supply_collateral" className="hover:bg-gray-700 focus:bg-gray-700">
+                  <SelectItem value="supply_collateral" className="hover:bg-gray-700 hover:text-gray-100 focus:bg-gray-700 focus:text-gray-100">
                     <div className="flex items-center gap-2">
                       <BarChart3 className="w-4 h-4 text-purple-400" />
                       Supply Collateral

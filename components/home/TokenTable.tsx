@@ -207,31 +207,18 @@ export const TokenTable: React.FC<TokenTableProps> = ({ pool }) => {
                       </div>
                     </div>
                     {/* Actions Row */}
-                    <div className="flex gap-2">
-                      <Link href="/swap" className="flex-1">
+                    <div className="grid grid-cols-2 gap-2">
+                      <Link href="/swap" className="w-full">
                         <Button
                           variant="outline"
-                          className="w-full h-9 min-w-[100px] bg-blue-600 hover:bg-blue-700 text-white border-blue-500"
+                          className="w-full h-9 bg-blue-600 hover:bg-blue-700 text-white hover:text-white border-blue-500"
                         >
-                          <svg
-                            className="w-4 h-4 mr-2"
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth={2}
-                              d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"
-                            />
-                          </svg>
                           Swap
                         </Button>
                       </Link>
                       <Button
                         variant="outline"
-                        className="flex-1 w-full h-9 min-w-[100px] bg-red-600 hover:bg-red-700 text-white border-red-500"
+                        className="w-full h-9 bg-red-600 hover:bg-red-700 text-white hover:text-white border-red-500"
                         onClick={() => {
                           setSelectedToken(token);
                           setIsRepayDialogOpen(true);
@@ -273,27 +260,14 @@ export const TokenTable: React.FC<TokenTableProps> = ({ pool }) => {
                       <Link href="/swap">
                         <Button
                           variant="outline"
-                          className="min-w-[100px] h-9 bg-blue-600 hover:bg-blue-700 text-white border-blue-500"
+                          className="w-24 h-9 bg-blue-600 hover:bg-blue-700 text-white hover:text-white border-blue-500"
                         >
-                          <svg
-                            className="w-4 h-4 mr-2"
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth={2}
-                              d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"
-                            />
-                          </svg>
                           Swap
                         </Button>
                       </Link>
                       <Button
                         variant="outline"
-                        className="min-w-[100px] h-9 bg-red-600 hover:bg-red-700 text-white border-red-500"
+                        className="w-24 h-9 bg-red-600 hover:bg-red-700 text-white hover:text-white border-red-500"
                         onClick={() => {
                           setSelectedToken(token);
                           setIsRepayDialogOpen(true);

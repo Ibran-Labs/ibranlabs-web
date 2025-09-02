@@ -15,7 +15,7 @@ export default function HomePage() {
   }, []);
 
   return (
-    <div className="flex items-center justify-center mb-4">
+    <div className="w-full min-h-screen">
       {isMobile ? <MobileView /> : <DesktopView />}
     </div>
   );

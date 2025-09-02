@@ -97,7 +97,7 @@ export const DetailsModal = ({ open, onClose, market }: DetailsModalProps) => {
               </SelectTrigger>
               <SelectContent className="bg-slate-800/95 text-white border border-slate-600/50 rounded-xl shadow-2xl z-[1000] max-h-60 backdrop-blur-xl">
                 {actions.map((action) => (
-                  <SelectItem key={action.value} value={action.value} className="hover:bg-slate-700/80 focus:bg-slate-700/80 rounded-lg mx-1 my-0.5 transition-colors duration-150">
+                  <SelectItem key={action.value} value={action.value} className="hover:bg-slate-700/80 hover:text-white focus:bg-slate-700/80 focus:text-white rounded-lg mx-1 my-0.5 transition-colors duration-150">
                     {action.label}
                   </SelectItem>
                 ))}

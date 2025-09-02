@@ -67,10 +67,10 @@ const MobileNavbarTelegram = () => {
   return (
     <>
       {/* Spacer untuk mencegah konten tertutup navbar - sesuaikan height sesuai kebutuhan */}
-      <div className="h-20" />
+      <div className="h-24" />
 
       {/* Bottom Navigation Bar - Fixed di bawah */}
-      <nav className="fixed bottom-0 left-1/2 transform -translate-x-1/2 max-w-2xl w-full z-50 bg-gray-950/95 border-t rounded-t-xl border-cyan-500/30 ">
+      <nav className="fixed bottom-0 left-1/2 transform -translate-x-1/2 max-w-2xl w-full z-[9999] bg-gray-950/95 border-t rounded-t-xl border-cyan-500/30 shadow-2xl">
         {/* Glow effect line di atas */}
         <div className="absolute -top-px left-0 right-0 h-px" />
 
@@ -158,20 +158,20 @@ const MobileNavbarTelegram = () => {
                 <div className="relative flex items-center justify-center mb-1">
                   {/* Glow Effect untuk wallet connected */}
                   {isMounted && isConnected && (
-                    <div className="absolute inset-0 bg-gray-800/50 hover:bg-gray-800 rounded-full  opacity-40 animate-pulse" />
+                    <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-blue-800 rounded-full blur-sm opacity-40 animate-pulse" />
                   )}
                   
                   <div className={`relative p-2.5 rounded-full transition-all duration-300 ${
                     isMounted && isConnected 
-                      ? "drop-shadow-lg bg-gray-800/50 hover:bg-gray-800" 
+                      ? "shadow-md shadow-blue-500/25 bg-gray-800/50 hover:bg-gray-800" 
                       : "bg-gray-800/50 hover:bg-gray-800"
                   }`}>
                     <Wallet2
                       size={22}
                       className={`transition-all duration-300 ${
                         isMounted && isConnected
-                          ? "text-green-400 drop-shadow-lg"
-                          : "text-red-400 hover:text-red-300"
+                          ? "text-blue-400 drop-shadow-lg"
+                          : "text-blue-400 hover:text-blue-300"
                       }`}
                       strokeWidth={isMounted && isConnected ? 2.5 : 2}
                     />
@@ -179,10 +179,10 @@ const MobileNavbarTelegram = () => {
                 </div>
                 <span className={`text-xs font-medium transition-all duration-300 mt-1 ${
                   isMounted && isConnected
-                    ? "text-green-400"
-                    : "text-red-500 hover:text-red-400"
+                    ? "text-blue-400"
+                    : "text-blue-400 hover:text-blue-300"
                 }`}>
-                  {isMounted && isConnected ? "Connected" : "Disconnected"}
+                  {isMounted && isConnected ? "Connected" : "Connect"}
                 </span>
               </button>
             </div>
@@ -238,9 +238,9 @@ const MobileNavbarTelegram = () => {
               {isMounted && isConnected ? (
                 <div className="flex flex-col items-center justify-center w-full">
                   {/* Wallet Info */}
-                  <div className="bg-green-500/20 border border-green-500/30 rounded-lg p-4 mb-4 w-full">
-                    <div className="text-green-400 text-sm font-medium text-center flex items-center justify-center gap-2">
-                      <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                  <div className="bg-blue-500/20 border border-blue-500/30 rounded-lg p-4 mb-4 w-full">
+                    <div className="text-blue-400 text-sm font-medium text-center flex items-center justify-center gap-2">
+                      <div className="w-2 h-2 bg-blue-400 rounded-full animate-pulse"></div>
                       Wallet Connected Successfully
                     </div>
                   </div>
@@ -258,7 +258,7 @@ const MobileNavbarTelegram = () => {
                   {/* Disconnect Button */}
                   <button
                     onClick={handleDisconnect}
-                    className="w-full bg-red-600 hover:bg-red-700 text-white font-semibold py-3 px-4 rounded-lg transition-all duration-200 active:scale-95 flex items-center justify-center gap-2"
+                    className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-4 rounded-lg transition-all duration-200 active:scale-95 flex items-center justify-center gap-2"
                   >
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />

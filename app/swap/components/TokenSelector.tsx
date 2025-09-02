@@ -83,7 +83,7 @@ const TokenSelector: React.FC<TokenSelectorProps> = ({
               <SelectItem
                 key={index}
                 value={token.addresses[defaultChain]}
-                className="text-gray-100 flex flex-row gap-2 items-center cursor-pointer hover:bg-slate-700/50"
+                className="text-gray-100 flex flex-row gap-2 items-center cursor-pointer hover:bg-slate-700/50 hover:text-gray-100"
               >
                 <Image
                   src={tokenLogo(token.addresses[defaultChain]) ?? ""}

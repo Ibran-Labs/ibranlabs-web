@@ -6,8 +6,8 @@ import { Coins } from "lucide-react";
 
 export default function TradePage() {
   return (
-    <div className="min-h-screen flex justify-center ">
-      <div className="container mx-auto max-2w-xl">
+    <div className="min-h-screen flex justify-center pb-24">
+      <div className="container mx-auto max-w-2xl">
         <div className="rounded-2xl px-2 py-6 shadow-xl border border-blue-400/30 bg-slate-900">
           <h1 className="text-3xl font-bold text-center text-blue-300 mb-6 flex flex-row gap-2 items-center justify-center">
             <Coins className="size-6" />

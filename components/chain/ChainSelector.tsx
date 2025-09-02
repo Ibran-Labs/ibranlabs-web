@@ -66,7 +66,7 @@ export const ChainSelector: React.FC<ChainSelectorProps> = ({
             {availableChains.length === 0 ? (
               <SelectItem
                 value="none"
-                className="text-gray-400 hover:bg-gray-700/50 focus:bg-gray-700/50"
+                className="text-gray-400 hover:bg-gray-700/50 hover:text-gray-200 focus:bg-gray-700/50 focus:text-gray-200"
               >
                 No chains available
               </SelectItem>
@@ -75,7 +75,7 @@ export const ChainSelector: React.FC<ChainSelectorProps> = ({
                 <SelectItem
                   key={String(chain.id)}
                   value={String(chain.id)}
-                  className="text-gray-200 hover:bg-gray-700/50 focus:bg-gray-700/50 rounded-lg mx-1 my-0.5 transition-colors duration-150"
+                  className="text-gray-200 hover:bg-gray-700/50 hover:text-gray-200 focus:bg-gray-700/50 focus:text-gray-200 rounded-lg mx-1 my-0.5 transition-colors duration-150"
                 >
                   <div className="flex items-center gap-3 py-1">
                     <Image
