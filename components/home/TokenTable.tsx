@@ -96,49 +96,102 @@ export const TokenTable: React.FC<TokenTableProps> = ({ pool }) => {
 
   if (!addressPosition || addressPosition === "0x0000000000000000000000000000000000000000") {
     return (
-      <div className="text-center py-8 text-gray-400">
+      <div className="text-center py-4 text-gray-400">
         <div className="flex flex-col items-center justify-center gap-2">
-          <div className="text-lg">📭</div>
           <div>No position found for this pool</div>
-          <div className="text-sm text-gray-500">
-            Pool: {pool.id?.slice(0, 10)}...{pool.id?.slice(-8)}
-          </div>
-          <div className="text-sm text-gray-500">
-            Wallet: {address?.slice(0, 10)}...{address?.slice(-8)}
-          </div>
         </div>
       </div>
     );
   }
 
+  const formatBalance = (positionBalance: any, isLoadingPositionBalance: boolean, token: any) => {
+    if (isLoadingPositionBalance) return <Spinner size="sm" className="text-green-400" />;
+    if (!positionBalance) return "0.00";
+
+    const balance = Number(positionBalance) / Math.pow(10, token.decimals);
+    return balance.toFixed(5);
+  };
+
   return (
     <div className="overflow-hidden rounded-lg border border-blue-400/30 shadow-sm bg-slate-800/30">
-      <div className="hidden md:grid md:grid-cols-3 gap-2 p-3 text-sm font-medium text-blue-300 border-b border-blue-400/20">
-        <div className="pl-4">Assets</div>
+      {/* Desktop Header - Hidden on mobile */}
+      <div className="hidden md:grid md:grid-cols-3 gap-4 p-4 text-sm font-medium text-blue-300 border-b border-blue-400/20">
+        <div>Assets</div>
         <div className="text-center">Current Balance</div>
         <div className="text-center">Quick Actions</div>
       </div>
 
-      <div className="md:divide-y md:divide-blue-400/20">
+      {/* Token List */}
+      <div className="divide-y divide-blue-400/20">
         {tokenBalances.map(({ token, positionBalance, isLoadingPositionBalance }) => {
           // Skip rendering if token is undefined
           if (!token) return null;
           
-          const formatBalance = () => {
-            if (isLoadingPositionBalance) return <Spinner size="sm" className="text-green-400" />;
-            if (!positionBalance) return "0.00";
-
-            const balance = Number(positionBalance) / Math.pow(10, token.decimals);
-            return balance.toFixed(5);
-          };
-
           return (
             <div
               key={token.addresses[defaultChain]}
-              className="flex flex-col md:grid md:grid-cols-3 gap-2 p-4 border-b border-blue-400/20 last:border-b-0"
+              className="p-4"
             >
-              {/* Assets Column */}
-              <div className="flex items-center justify-between md:justify-start gap-3 pl-4">
+              {/* Mobile Layout */}
+              <div className="md:hidden space-y-3">
+                {/* Token Info Row */}
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-3">
+                    {token.logo && (
+                      <Image
+                        src={token.logo}
+                        alt={token.symbol}
+                        width={32}
+                        height={32}
+                        className="rounded-full"
+                      />
+                    )}
+                    <span className="text-white font-medium">${token.symbol}</span>
+                  </div>
+                  <div className="text-green-400 font-medium">
+                    {formatBalance(positionBalance, isLoadingPositionBalance, token)}
+                  </div>
+                </div>
+                
+                {/* Actions Row */}
+                <div className="flex gap-2">
+                  <Link href="/swap" className="flex-1">
+                    <Button
+                      variant="outline"
+                      className="w-full bg-blue-600 hover:bg-blue-700 text-white border-blue-500 h-9"
+                    >
+                      <svg
+                        className="w-4 h-4 mr-2"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"
+                        />
+                      </svg>
+                      Swap
+                    </Button>
+                  </Link>
+                  <Button
+                    variant="outline"
+                    className="flex-1 bg-red-600 hover:bg-red-700 text-white border-red-500 h-9"
+                    onClick={() => {
+                      setSelectedToken(token);
+                      setIsRepayDialogOpen(true);
+                    }}
+                  >
+                    Repay
+                  </Button>
+                </div>
+              </div>
+
+              {/* Desktop Layout */}
+              <div className="hidden md:grid md:grid-cols-3 gap-4 items-center">
+                {/* Assets Column */}
                 <div className="flex items-center gap-3">
                   {token.logo && (
                     <Image
@@ -151,46 +204,48 @@ export const TokenTable: React.FC<TokenTableProps> = ({ pool }) => {
                   )}
                   <span className="text-white font-medium">${token.symbol}</span>
                 </div>
-                <span className="text-green-400 font-medium">{formatBalance()}</span>
-              </div>
 
-              <div className="hidden md:block text-center">
-                <span className="text-green-400 font-medium">{formatBalance()}</span>
-              </div>
+                {/* Balance Column */}
+                <div className="text-center">
+                  <span className="text-green-400 font-medium">
+                    {formatBalance(positionBalance, isLoadingPositionBalance, token)}
+                  </span>
+                </div>
 
-              {/* Quick Actions Column */}
-              <div className="flex flex-row items-center justify-center gap-2 mt-2 md:mt-0">
-                <Link href="/swap" className="w-1/2 md:w-auto">
+                {/* Actions Column */}
+                <div className="flex items-center justify-center gap-2">
+                  <Link href="/swap">
+                    <Button
+                      variant="outline"
+                      className="bg-blue-600 hover:bg-blue-700 text-white border-blue-500 px-4 py-2"
+                    >
+                      <svg
+                        className="w-4 h-4 mr-2"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"
+                        />
+                      </svg>
+                      Swap
+                    </Button>
+                  </Link>
                   <Button
                     variant="outline"
-                    className="w-full bg-blue-600 hover:bg-blue-700 text-white border-blue-500 text-xs px-2 py-1 md:text-sm md:px-3 md:py-2 h-8 md:h-auto"
+                    className="bg-red-600 hover:bg-red-700 text-white border-red-500 px-4 py-2"
+                    onClick={() => {
+                      setSelectedToken(token);
+                      setIsRepayDialogOpen(true);
+                    }}
                   >
-                    <svg
-                      className="w-3 h-3 md:w-4 md:h-4 mr-1"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"
-                      />
-                    </svg>
-                    Swap
+                    Repay
                   </Button>
-                </Link>
-                <Button
-                  variant="outline"
-                  className="w-1/2 md:w-auto bg-red-600 hover:bg-red-700 text-white border-red-500 text-xs px-2 py-1 md:text-sm md:px-3 md:py-2 h-8 md:h-auto"
-                  onClick={() => {
-                    setSelectedToken(token);
-                    setIsRepayDialogOpen(true);
-                  }}
-                >
-                  Repay
-                </Button>
+                </div>
               </div>
             </div>
           );
