@@ -181,7 +181,7 @@ export const TokenTable: React.FC<TokenTableProps> = ({ pool }) => {
               return (
                 <div key={token.addresses[defaultChain]} className="p-4">
                   {/* Mobile Layout */}
-                  <div className="md:hidden space-y-3">
+                  <div className="space-y-3">
                     {/* Token Info Row */}
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-3">
