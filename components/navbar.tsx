@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
 import { ConnectWallet, Wallet, WalletDropdown, WalletDropdownDisconnect } from "@coinbase/onchainkit/wallet";
 import { Name, Identity, Address, Avatar, EthBalance } from "@coinbase/onchainkit/identity";
-import { useAccount } from "wagmi";
+import { useAccount, useDisconnect } from "wagmi";
 
 
 const MobileNavbarTelegram = () => {
@@ -15,6 +15,7 @@ const MobileNavbarTelegram = () => {
   const [showWalletPopup, setShowWalletPopup] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
   const { isConnected } = useAccount();
+  const { disconnect } = useDisconnect();
 
   // Prevent hydration mismatch
   useEffect(() => {
@@ -56,6 +57,11 @@ const MobileNavbarTelegram = () => {
 
   const closeWalletPopup = () => {
     setShowWalletPopup(false);
+  };
+
+  const handleDisconnect = () => {
+    disconnect();
+    closeWalletPopup();
   };
 
   return (
@@ -164,7 +170,7 @@ const MobileNavbarTelegram = () => {
                       size={22}
                       className={`transition-all duration-300 ${
                         isMounted && isConnected
-                          ? "text-gray-400 drop-shadow-lg"
+                          ? "text-green-400 drop-shadow-lg"
                           : "text-red-400 hover:text-red-300"
                       }`}
                       strokeWidth={isMounted && isConnected ? 2.5 : 2}
@@ -173,7 +179,7 @@ const MobileNavbarTelegram = () => {
                 </div>
                 <span className={`text-xs font-medium transition-all duration-300 mt-1 ${
                   isMounted && isConnected
-                    ? "text-gray-400 "
+                    ? "text-green-400"
                     : "text-red-500 hover:text-red-400"
                 }`}>
                   {isMounted && isConnected ? "Connected" : "Disconnected"}
@@ -189,7 +195,7 @@ const MobileNavbarTelegram = () => {
 
       {/* Wallet Connect Popup */}
       {showWalletPopup && (
-        <div className="fixed inset-0 z-[60] flex items-center justify-center">
+        <div className="fixed inset-0 z-[100] flex items-center justify-center">
           {/* Backdrop */}
           <div 
             className="absolute inset-0 bg-black/50 backdrop-blur-sm"
@@ -202,7 +208,7 @@ const MobileNavbarTelegram = () => {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.9, y: 20 }}
             transition={{ duration: 0.2 }}
-            className="relative bg-gray-900 border border-blue-500/30 rounded-2xl p-6 w-80 max-w-[90vw] shadow-2xl shadow-blue-500/20"
+            className="relative bg-gray-900 border border-blue-500/30 rounded-2xl p-6 w-80 max-w-[90vw] shadow-2xl shadow-blue-500/20 z-[101]"
           >
             {/* Close button */}
             <button
@@ -219,9 +225,11 @@ const MobileNavbarTelegram = () => {
               <div className="w-16 h-16 mx-auto mb-4 bg-transparent border-2 border-blue-800 rounded-full flex items-center justify-center">
                 <Wallet2 className="w-8 h-8 text-blue-800" />
               </div>
-              <h3 className="text-xl font-bold text-white mb-2">Connect Wallet</h3>
+              <h3 className="text-xl font-bold text-white mb-2">
+                {isMounted && isConnected ? "Wallet Connected" : "Connect Wallet"}
+              </h3>
               <p className="text-gray-400 text-sm">
-                {isMounted && isConnected ? "Your wallet is connected" : "Choose your preferred wallet to connect"}
+                {isMounted && isConnected ? "Manage your wallet connection" : "Choose your preferred wallet to connect"}
               </p>
             </div>
 
@@ -229,32 +237,41 @@ const MobileNavbarTelegram = () => {
             <div className="flex flex-col items-center justify-center space-y-4">
               {isMounted && isConnected ? (
                 <div className="flex flex-col items-center justify-center w-full">
-                  <div className="bg-blue-500/20 border border-blue-500/30 rounded-lg p-4 mb-4 w-full">
-                    <div className="text-blue-400 text-sm font-medium text-center">Wallet Connected</div>
+                  {/* Wallet Info */}
+                  <div className="bg-green-500/20 border border-green-500/30 rounded-lg p-4 mb-4 w-full">
+                    <div className="text-green-400 text-sm font-medium text-center flex items-center justify-center gap-2">
+                      <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                      Wallet Connected Successfully
+                    </div>
                   </div>
-                  <div className="w-full flex justify-center">
-                    <Wallet className="z-10">
-                      <ConnectWallet>
-                        <Name className="text-inherit" />
-                      </ConnectWallet>
-                      <WalletDropdown>
-                        <Identity className="px-4 pt-3 pb-2" hasCopyAddressOnClick>
-                          <Avatar />
-                          <Name />
-                          <Address />
-                          <EthBalance />
-                        </Identity>
-                        <WalletDropdownDisconnect />
-                      </WalletDropdown>
-                    </Wallet>
+                  
+                  {/* Wallet Identity */}
+                  <div className="w-full flex justify-center mb-6">
+                    <Identity className="px-4 pt-3 pb-2 bg-gray-800/50 rounded-lg" hasCopyAddressOnClick>
+                      <Avatar />
+                      <Name />
+                      <Address />
+                      <EthBalance />
+                    </Identity>
                   </div>
+
+                  {/* Disconnect Button */}
+                  <button
+                    onClick={handleDisconnect}
+                    className="w-full bg-red-600 hover:bg-red-700 text-white font-semibold py-3 px-4 rounded-lg transition-all duration-200 active:scale-95 flex items-center justify-center gap-2"
+                  >
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                    </svg>
+                    Disconnect Wallet
+                  </button>
                 </div>
               ) : (
                 <div className="flex flex-col items-center justify-center w-full">
                   <div className="w-full flex justify-center">
-                    <Wallet className="z-10">
-                      <ConnectWallet>
-                        <Name className="text-inherit" />
+                    <Wallet>
+                      <ConnectWallet className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-4 rounded-lg transition-all duration-200 active:scale-95">
+                        <span>Connect Wallet</span>
                       </ConnectWallet>
                       <WalletDropdown>
                         <Identity className="px-4 pt-3 pb-2" hasCopyAddressOnClick>
